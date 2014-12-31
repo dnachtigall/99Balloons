@@ -14,32 +14,20 @@ class ViewController: UIViewController {
     
 
     var balloonsArray:[Balloon] = []
-    var ballonpicturenamesArray:[String] = []
     var currentIndex = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+       
         myImageView.image = UIImage(named: "BerlinTVTower.jpg")
         myTextLabel.textColor = UIColor(white: 0, alpha: 100)
         myTextLabel.text = "Welcome. Press Next to display balloon pictures."
         
-        // Make an Array with the names of the 4 BallonPicture Names for easier randomly picking them.
-        for var balloons = 1; balloons <= 4; balloons++ {
-            ballonpicturenamesArray.append("RedBalloon\(balloons).jpg")
-        }
+        self.makeBalloons()
         
-        
-        // Call make Balloon 99 times and append each returned Balloon to the Balloons Array
-        for var i=1; i <= 99; i++ {
-            var balloon = makeBalloon()
-            balloon.number = i
-            balloonsArray.append(balloon)
-        }
-        
-        
-        
+        println(balloonsArray)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,18 +70,17 @@ class ViewController: UIViewController {
         
     }
 
-    func makeBalloon() -> Balloon {
+    func makeBalloons() {
         
-            // Generate Random Number to assign random Image
-            let randomNumber = Int(arc4random_uniform(UInt32(4)))
-        
-            //make the balloon from the struct, give it its random image and then return the Balloon
+            // Generate 99 Balloons with one of the 4 images randomly assigned
+        for var balloonCount = 1; balloonCount <= 99; ++balloonCount {
             var madeBalloon = Balloon()
-            madeBalloon.image = UIImage(named: self.ballonpicturenamesArray[randomNumber])
-            return madeBalloon
+            madeBalloon.number = balloonCount
+            let randomNumber = Int(arc4random_uniform(UInt32(4)))
+            madeBalloon.image = UIImage(named: "RedBalloon\(randomNumber + 1).jpg")
+            balloonsArray.append(madeBalloon)
         
-        
-        
+        }
         
     }
     

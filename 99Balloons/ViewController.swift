@@ -67,8 +67,18 @@ class ViewController: UIViewController {
         
         // Update Image View and Label with the properties of the fetched Balloon
         
-        self.myImageView.image = currentBallon.image
-        self.myTextLabel.text = "Ballon No. \(currentBallon.number)"
+        UIView.transitionWithView(self.view, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {
+            
+            self.myImageView.image = currentBallon.image
+            self.myTextLabel.text = "Ballon No. \(currentBallon.number)"
+
+            
+            }, completion: {
+            
+                (finished:Bool) -> () in
+                
+            })
+        
         
     }
 
